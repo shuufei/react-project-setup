@@ -1,4 +1,6 @@
-import React from 'react';
+// import React from 'react';
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core';
 import logo from './logo.svg';
 import './App.css';
 
@@ -15,6 +17,9 @@ function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
+          css={css`
+            color: red;
+          `}
         >
           Learn React
         </a>
