@@ -1,31 +1,43 @@
-// import React from 'react';
+import React from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import logo from './logo.svg';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css';
+import { RootState } from './store/root-store';
+import { actionCreator } from './store/todo';
 
-function App() {
+const App: React.FC = () => {
+  const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.todo.todos);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <button
+        type="button"
+        onClick={() =>
+          dispatch(
+            actionCreator.addTodo({
+              todo: {
+                id: 0,
+                title: '牛乳買う',
+                isDone: false,
+              },
+            })
+          )
+        }
+      >
+        add todo
+      </button>
+      {todos.map((v) => (
+        <p
           css={css`
-            color: red;
+            margin-top: 8px;
           `}
         >
-          Learn React
-        </a>
-      </header>
+          {v.title}
+        </p>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
